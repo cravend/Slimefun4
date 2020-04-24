@@ -34,6 +34,7 @@ public class ThirdPartyPluginService {
     private boolean isEmeraldEnchantsInstalled = false;
     private boolean isCoreProtectInstalled = false;
     private boolean isPlaceholderAPIInstalled = false;
+    private boolean isChestShopInstalled = false;
 
     // Overridden if ExoticGarden is loaded
     private Function<Block, Optional<ItemStack>> exoticGardenIntegration = b -> Optional.empty();
@@ -46,6 +47,10 @@ public class ThirdPartyPluginService {
         if (isPluginInstalled("PlaceholderAPI")) {
             isPlaceholderAPIInstalled = true;
             new PlaceholderAPIHook().register();
+        }
+
+        if (true || isPluginInstalled("ChestShop")) {
+            new ChestShopHook(plugin);
         }
 
         if (isPluginInstalled("EmeraldEnchants")) {
@@ -118,6 +123,10 @@ public class ThirdPartyPluginService {
 
     public boolean isPlaceholderAPIInstalled() {
         return isPlaceholderAPIInstalled;
+    }
+
+    public boolean isChestShopInstalled() {
+        return isChestShopInstalled;
     }
 
     public Optional<ItemStack> harvestExoticGardenPlant(Block block) {
